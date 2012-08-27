@@ -27,7 +27,7 @@
 #define MOVING_AVERAGE_MAX_LEN 25 //!< Maximum number of samples, as specified by the length parameter in the constructor
 
 /*!  This filter calculates the average of a set number of previous values.
-This has a very slow-moving output.
+This has a very slow-moving output if a long length is specified.
  To use: create an instance of the filter and submit new readings using update().
  Readings should be sampled at regular (i.e. equal) time intervals.
  @brief  A finite length moving average without weighting. */
@@ -39,10 +39,8 @@ public:
    Otherwise the output is as if the input had just been turned on with previous zero readings. */
   MovingAverage(int length, boolean burnIn);
 
-  /** @name Active
-   Methods to interact with an active filter. */
-  //!@{
-  /*! Submit a new measurement to the filter.
+  /*! Submit a new measurement to the filter.\n
+  Readings should be sampled at regular (i.e. equal) time intervals.
    @param newVal The new value.
    @returns The filter output. */
   int update(int newVal);
@@ -50,19 +48,12 @@ public:
   /*! Same as the integer version except that the average is computed using 4 byte floating point arithmetic. */
   float updateF(int newVal);
 
-  //!@}  
-
-  /** @name Debugging
-   Useful stuff for debugging etc */
-  //!@{
   /*! Get the previously-submitted values.
-  @param[out] A buffer of length specified by the length parameter in the constructor. */
-  void getHistory(int* values[]);
+  @param[out] values A buffer of length specified by the length parameter in the constructor. */
+  void getHistory(int values[]);
   /*! What was the last index used in the returned buffer from getHistory()?
   @returns The index to the value submitted by the last update() */
   int getLastIndex();
-  //!@}
-
 
 private:
   //constructor parameters

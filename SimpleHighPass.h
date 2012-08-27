@@ -30,9 +30,9 @@
 output[t] = alpha*(input[t]-input[t-1]) + alpha*output[t-1], where alpha is the impulse factor and t is the time-step.
 Small values of alpha (<<0.5) cause only high frequencies (rapid, large swings in input) to give an output far from 0.
 Large values of alpha mean the output only settles to zero after a considerable number of unchanging samples.
+ Readings should be sampled at regular (i.e. equal) time intervals.\n
+ See http://en.wikipedia.org/wiki/High-pass_filter \n
  To use: create an instance of the filter and submit new readings using update().
- Readings should be sampled at regular (i.e. equal) time intervals.
- See http://en.wikipedia.org/wiki/High-pass_filter
  @brief  An infinite length moving average with exponential weighting.
  @todo a version using fixed-point integer arithmetic. */
 class SimpleHighPass{
@@ -43,15 +43,11 @@ public:
    Otherwise the output is as if the input had just been turned on with previous zero readings. */
   SimpleHighPass(float alpha, boolean burnIn);
 
-  /** @name Active
-   Methods to interact with an active filter. */
-  //!@{
-  /*! Submit a new measurement to the filter.
+  /*! Submit a new measurement to the filter.\n
+  Readings should be sampled at regular (i.e. equal) time intervals.
    @param newVal The new value.
    @returns The filter output. */
   float updateF(int newVal);
-  //!@}  
-
 
 private:
   //constructor parameters

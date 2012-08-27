@@ -19,6 +19,7 @@ MedianFilter::MedianFilter(int length, boolean burnIn){
   }
   _burnIn = burnIn;
   _index = 0;
+  _updated=false;
 }
 
 int MedianFilter::update(int newVal){
@@ -99,8 +100,10 @@ int MedianFilter::update(int newVal){
 
 
 // debugging
-void MedianFilter::getHistory(int* values[]){
-  *values = _values;  
+void MedianFilter::getHistory(int values[]){
+  for(int i = 0; i<_length; i++){
+    values[i] = _values[i];
+  }  
 }
 
 int MedianFilter::getLastIndex(){
@@ -110,6 +113,7 @@ int MedianFilter::getLastIndex(){
   }
   return lastIndex;
 }
+
 
 
 

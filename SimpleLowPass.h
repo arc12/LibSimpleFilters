@@ -27,30 +27,35 @@
 #include "Arduino.h"
 
 /*!  This filter calculates its output based on the previous output and the update value.
-output[t] = alpha*input + (1-alpha)*output[t-1], where alpha is the smoothing factor and t is the time-step.
-Small values of alpha (<<0.5) make for slow-moving output.
+output[i] = alpha*input[i] + (1-alpha)*output[i-1], where alpha is the smoothing factor and i is the sample/frame (i-1 = previous).
+Small values of alpha (<<0.5) make for slow-moving output. 
+The time constant, "RC" = sample period * ((1-alpha)/alpha)
+RC = time for a step change to reach 63.2% of asymptotic value.
+Cutoff frequency = 1/(2*pi*RC), hence
+f_sampling/f_cutoff = 2*pi*(1-alpha)/alpha
+So a "cutoff frequency" of 1/10th the sample rate requires alpha=0.385\n
+ This is a an infinite-impulse-response (IIR) single-pole lowpass filter, see http://en.wikipedia.org/wiki/Low-pass_filter \n
  To use: create an instance of the filter and submit new readings using update().
- Readings should be sampled at regular (i.e. equal) time intervals.
- This is a an infinite-impulse-response (IIR) single-pole lowpass filter, see http://en.wikipedia.org/wiki/Low-pass_filter
  @brief  An infinite length moving average with exponential weighting.
  @todo a version using fixed-point integer arithmetic. */
 class SimpleLowPass{
 public:
   /*! Create the filter with specified parameters.
-  @param alpha The smoothing factor (range 0<=alpha<=1).
+  @param alpha The smoothing factor (range 0<=alpha<=1). See calcAlpha(). NB this is different to ButterworthLowPass2, which uses the fRatio directly.
    @param burnIn Whether to initialise the filter on first reading such that the output = the input after that reading.
    Otherwise the output is as if the input had just been turned on with previous zero readings. */
   SimpleLowPass(float alpha, boolean burnIn);
+  
+  /*! Calculate the alpha value for a desired "cutoff" frequency.
+  See the constructor.
+   @param fRatio The ratio of the sampling frequency (each sample is submitted to update()) over the desired cut-off frequency.*/
+  float calcAlpha(float fRatio);
 
-  /** @name Active
-   Methods to interact with an active filter. */
-  //!@{
-  /*! Submit a new measurement to the filter.
+  /*! Submit a new measurement to the filter.\n
+  Readings should be sampled at regular (i.e. equal) time intervals.
    @param newVal The new value.
    @returns The filter output. */
   float updateF(int newVal);
-  //!@}  
-
 
 private:
   //constructor parameters

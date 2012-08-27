@@ -27,8 +27,8 @@
 
 /*!  This filter calculates the median of a set number of previous values.
 This is able to suppress sudden impules/glitches while still allowing step changes to be preserved, although delayed.
-Longer buffers will reject longer outlier signals.
-See http://en.wikipedia.org/wiki/Median_filter (also http://medim.sth.kth.se/6l2872/F/F7-1.pdf)
+Longer buffers will reject longer outlier signals.\n
+See http://en.wikipedia.org/wiki/Median_filter (also http://medim.sth.kth.se/6l2872/F/F7-1.pdf)\n
  To use: create an instance of the filter and submit new readings using update().
  Readings should be sampled at regular (i.e. equal) time intervals.
  @brief  A finite length median filter. */
@@ -40,27 +40,18 @@ public:
    Otherwise the output is as if the input had just been turned on with previous zero readings. */
   MedianFilter(int length, boolean burnIn);
 
-  /** @name Active
-   Methods to interact with an active filter. */
-  //!@{
-  /*! Submit a new measurement to the filter.
+  /*! Submit a new measurement to the filter.\n
+  Readings should be sampled at regular (i.e. equal) time intervals.
    @param newVal The new value.
    @returns The filter output. */
   int update(int newVal);
 
-  //!@}  
-
-  /** @name Debugging
-   Useful stuff for debugging etc */
-  //!@{
-  /*! Get the previously-submitted values.
-  @param[out] A buffer of length specified by the length parameter in the constructor. */
-  void getHistory(int* values[]);
+  /*! Get the previously-submitted values. This is a "circular buffer" so the current pointer must be obtained using getLastIndex()
+  @param[out] values A buffer of length specified by the length parameter in the constructor. */
+  void getHistory(int values[]);
   /*! What was the last index used in the returned buffer from getHistory()?
   @returns The index to the value submitted by the last update() */
   int getLastIndex();
-  //!@}
-
 
 private:
   //constructor parameters

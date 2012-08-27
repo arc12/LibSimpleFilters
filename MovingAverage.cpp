@@ -11,6 +11,7 @@ MovingAverage::MovingAverage(int length, boolean burnIn){
   _correction = _length/2;
   _burnIn = burnIn;
   _index = 0;
+  _updated=false;
 }
 
 int MovingAverage::update(int newVal){
@@ -24,10 +25,11 @@ float MovingAverage::updateF(int newVal){
 }
 
 // debugging
-void MovingAverage::getHistory(int* values[]){
-  *values = _values;  
+void MovingAverage::getHistory(int values[]){
+  for(int i = 0; i<_length; i++){
+    values[i] = _values[i];
+  }  
 }
-
 int MovingAverage::getLastIndex(){
   int lastIndex = _index-1;
   if(lastIndex<0){

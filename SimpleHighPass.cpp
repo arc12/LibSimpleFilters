@@ -1,9 +1,15 @@
 #include "SimpleHighPass.h"
 
+const float pi = 3.1415927;
+
 SimpleHighPass::SimpleHighPass(float alpha, boolean burnIn){
   _alpha = alpha;
   _burnIn = burnIn;
   _lastOutput = 0.0F; 
+}
+
+float SimpleHighPass::calcAlpha(float fRatio){
+  return fRatio/(2.0F*pi + fRatio); 
 }
 
 float SimpleHighPass::updateF(int newVal){
@@ -18,3 +24,4 @@ float SimpleHighPass::updateF(int newVal){
   _lastInput = newVal;
   return _lastOutput;
 }
+

@@ -29,7 +29,8 @@
 /*! A Second Order Butterworth Filter, which may be used to produce any even-order filter by cascading a
   series of second order filters (see the constructors).\n
   Butterworth Filters are principally-defined by a cut-off frequency at which attenuation is around -3dB and after which
- signal attenuation is 20N dB/decade (N=2 for second order). They use a recursive equation which takes account of all past values (i.e. infinite impulse response)
+ signal attenuation is 20N dB/decade (N=2 for second order). They use a recursive equation which takes account of all past values
+ (i.e. infinite impulse response) and have a phase shift that varies with frequency (hence there is some distortion).
   They have a maximally flat response in the pass-band, a better pulse response than Chebyshev filters
   and a better rate of attenuation than Bessel filters. Large transients are not filtered, though.
   The flat response means that signals in the pass band do not recieve frequency-dependent attenuation.\n

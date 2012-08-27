@@ -38,10 +38,14 @@ Large values of alpha mean the output only settles to zero after a considerable 
 class SimpleHighPass{
 public:
   /*! Create the filter with specified parameters.
-  @param alpha The impulse factor (range 0<=alpha<=1).
+  @param alpha The impulse factor (range 0<=alpha<=1). See calcAlpha().
    @param burnIn Whether to initialise the filter on first reading such that the output = zero (as if input had been constant prior to this).
    Otherwise the output is as if the input had just been turned on with previous zero readings. */
   SimpleHighPass(float alpha, boolean burnIn);
+  
+  /*! Calculate the alpha value for a desired "corner" frequency.
+   @param fRatio The ratio of the sampling frequency (each sample is submitted to update()) over the desired corner frequency.*/
+  float calcAlpha(float fRatio);
 
   /*! Submit a new measurement to the filter.\n
   Readings should be sampled at regular (i.e. equal) time intervals.

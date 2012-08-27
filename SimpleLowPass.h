@@ -34,7 +34,8 @@ RC = time for a step change to reach 63.2% of asymptotic value.
 Cutoff frequency = 1/(2*pi*RC), hence
 f_sampling/f_cutoff = 2*pi*(1-alpha)/alpha
 So a "cutoff frequency" of 1/10th the sample rate requires alpha=0.385\n
- This is a an infinite-impulse-response (IIR) single-pole lowpass filter, see http://en.wikipedia.org/wiki/Low-pass_filter \n
+ This is a an infinite-impulse-response (IIR) single-pole lowpass filter, see http://en.wikipedia.org/wiki/Low-pass_filter 
+ and also http://helpful.knobs-dials.com/index.php/Low-pass_filter for more introductory comments. \n
  To use: create an instance of the filter and submit new readings using update().
  @brief  An infinite length moving average with exponential weighting.
  @todo a version using fixed-point integer arithmetic. */

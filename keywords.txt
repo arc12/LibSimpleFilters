@@ -1,16 +1,16 @@
-MovingAverage KEYWORD1
-Median  KEYWORD1
-SimpleLowPass  KEYWORD1
-SimpleHighPass  KEYWORD1
-ButterworthLowPass2  KEYWORD1
+MovingAverage	KEYWORD1
+Median	KEYWORD1
+SimpleLowPass	KEYWORD1
+SimpleHighPass	KEYWORD1
+ButterworthLowPass2	KEYWORD1
 
-calcAlpha KEYWORD2
-getCoefficients KEYWORD2
-printCoefficients KEYWORD2
-getHistory KEYWORD2
-getLastIndex KEYWORD2
-getState KEYWORD2
-setState KEYWORD2
-update KEYWORD2
-updateF KEYWORD2
+calcAlpha	KEYWORD2
+getCoefficients	KEYWORD2
+printCoefficients	KEYWORD2
+getHistory	KEYWORD2
+getLastIndex	KEYWORD2
+getState	KEYWORD2
+setState	KEYWORD2
+update	KEYWORD2
+updateF	KEYWORD2
 

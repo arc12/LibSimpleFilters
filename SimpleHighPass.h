@@ -1,5 +1,5 @@
 /* SimpleHighPass.h - Discrete Time High Pass Filter                               
- Copyright 2012, Adam Cooper
+ Copyright 2012, Adam Cooper */
  
 /* ***************************** LICENCE ************************************
  *  This file is part of LibSimpleFilters Arduino library.                   *

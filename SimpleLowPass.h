@@ -1,5 +1,5 @@
 /* SimpleLowPass.h - Infinite Impulse Exponential Moving Average                               
- Copyright 2012, Adam Cooper
+ Copyright 2012, Adam Cooper */
  
 /* ***************************** LICENCE ************************************
  *  This file is part of LibSimpleFilters Arduino library.                   *

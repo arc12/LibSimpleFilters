@@ -1,6 +1,8 @@
 #include "SimpleLowPass.h"
 
-const float pi = 3.1415927;
+#ifndef TWOPI
+	#define TWOPI 6.2831854F
+#endif
 
 SimpleLowPass::SimpleLowPass(float alpha, boolean burnIn){
   _alpha = alpha;
@@ -8,7 +10,7 @@ SimpleLowPass::SimpleLowPass(float alpha, boolean burnIn){
   _lastOutput = 0.0F; 
 }
   float SimpleLowPass::calcAlpha(float fRatio){
-    return 2.0F*pi/(fRatio + 2.0F*pi);
+    return TWOPI/(fRatio + TWOPI);
   }
 
 float SimpleLowPass::updateF(int newVal){

@@ -1,6 +1,9 @@
 #include "ButterworthLowPass2.h"
 
-const float pi = 3.1415927;
+#ifndef PI
+	#define PI 3.1415927;F
+#endif
+ 
 
 ButterworthLowPass2::ButterworthLowPass2(float fRatio, boolean burnIn){
   _burnIn = burnIn;
@@ -97,9 +100,9 @@ void ButterworthLowPass2::setState(float state[]){
 void ButterworthLowPass2::calculateCoefficients(float fRatio, int k, int N){
   //see http://www.kwon3d.com/theory/filtering/fil.html
   //check with http://www-users.cs.york.ac.uk/~fisher/mkfilter/trad.html
-  float omegaC = tan(pi/fRatio);
+  float omegaC = tan(PI/fRatio);
   float omegaC2 = pow(omegaC,2);
-  float ckn = 2.0F*cos(float(2*k+1)*pi/float(2*N))*omegaC;
+  float ckn = 2.0F*cos(float(2*k+1)*PI/float(2*N))*omegaC;
   float c_k = 1.0F + ckn + omegaC2;
   _gain = omegaC2/c_k;
   _a0=1.0F;
